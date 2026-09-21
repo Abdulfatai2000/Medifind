@@ -15,7 +15,6 @@ import {
 import { AlertTriangle, MapPin, Store, Plus, Minus, Info } from "lucide-react";
 import { createReservation } from "@/lib/mock-data";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 
 interface ReservationModalProps {
   result: SearchResult;

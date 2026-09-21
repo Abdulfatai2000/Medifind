@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import type { SearchResult, StockStatus } from "@/types";
 import { StockFreshnessBadge } from "@/components/shared/StockFreshnessBadge";

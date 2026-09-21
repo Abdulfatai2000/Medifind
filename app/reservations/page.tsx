@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { getMyReservations, cancelReservation } from "@/lib/mock-data";
-import { Reservation, ReservationStatus } from "@/types";
+import { Reservation } from "@/types";
 import { ReservationStatusBadge } from "@/components/shared/ReservationStatusBadge";
 import { ReservationTimeline } from "@/components/shared/ReservationTimeline";
 import { Button } from "@/components/ui/button";
@@ -193,7 +193,7 @@ export default function ReservationsPage() {
               <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-between gap-2 border-t pt-4">
                 {(selectedRes.status === "PENDING_CONFIRMATION" || selectedRes.status === "CONFIRMED") ? (
                   <>
-                    <Button variant="destructive" onClick={() => handleCancel(selectedRes.id)}>
+                    <Button variant="danger" onClick={() => handleCancel(selectedRes.id)}>
                       Cancel Request
                     </Button>
                     <Button asChild variant="outline">
