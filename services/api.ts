@@ -30,7 +30,7 @@ export const api = {
     return handleResponse<T>(response);
   },
 
-  async post<T>(endpoint: string, data: any, options?: RequestInit): Promise<T> {
+  async post<T>(endpoint: string, data: unknown, options?: RequestInit): Promise<T> {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
       method: "POST",
@@ -43,7 +43,7 @@ export const api = {
     return handleResponse<T>(response);
   },
 
-  async patch<T>(endpoint: string, data: any, options?: RequestInit): Promise<T> {
+  async patch<T>(endpoint: string, data: unknown, options?: RequestInit): Promise<T> {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...options,
       method: "PATCH",
