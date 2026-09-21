@@ -88,13 +88,30 @@ export interface SearchFilters {
 
 export type SortOption = 'nearest' | 'lowest_price' | 'freshest' | 'highest_quantity';
 
+export type ReservationStatus = 
+  | 'PENDING_CONFIRMATION'
+  | 'CONFIRMED'
+  | 'READY_FOR_PICKUP'
+  | 'REJECTED'
+  | 'CANCELLED'
+  | 'COMPLETED'
+  | 'EXPIRED';
+
 export interface Reservation {
   id: string;
   userId: string;
   pharmacyMedicineId: string;
   quantity: number;
-  status: 'PENDING' | 'CONFIRMED' | 'FULFILLED' | 'CANCELLED';
-  createdAt: string;
+  unitPrice: number;
+  totalPrice: number;
+  status: ReservationStatus;
+  requestedAt: string;
+  confirmedAt?: string;
+  pickupDeadline?: string;
+  updatedAt: string;
+  // Included for frontend mock rendering convenience
+  medicine?: Medicine;
+  pharmacy?: Pharmacy;
 }
 
 export interface Prescription {
