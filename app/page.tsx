@@ -1,132 +1,206 @@
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import Link from "next/link";
+// Removed unused PageWrapper
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { EmptyState } from "@/components/shared/EmptyState";
-import { ErrorState } from "@/components/shared/ErrorState";
-import { LoadingState } from "@/components/shared/LoadingState";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Search } from "lucide-react";
+import { Search, MapPin, ShieldCheck, Clock, CheckCircle, Activity, ShoppingBag, ArrowRight, Store } from "lucide-react";
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <PageWrapper>
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 mb-2">MediFind Design System</h1>
-        <p className="text-gray-500">Phase 1: Frontend Foundation Showcase</p>
-      </div>
-
-      <div className="space-y-12">
-        {/* Buttons */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4 border-b pb-2">Buttons</h2>
-          <div className="flex flex-wrap gap-4 items-center">
-            <Button variant="default">Primary Button</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="danger">Danger</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="link">Link Style</Button>
-          </div>
-        </section>
-
-        {/* Inputs */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4 border-b pb-2">Inputs</h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl">
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Standard Input</label>
-              <Input placeholder="Enter your email..." />
+    <div className="flex-1">
+      {/* Hero Section */}
+      <section className="bg-emerald-50/50 py-16 md:py-24 lg:py-32">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col items-center text-center space-y-6 max-w-3xl mx-auto">
+            <Badge variant="FRESH" className="px-3 py-1 text-sm mb-2 rounded-full font-medium">
+              Now active in Ile-Ife, Osun State
+            </Badge>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
+              Find the medicine you need. <br className="hidden md:block" />
+              <span className="text-emerald-600">Know it&apos;s available before you leave home.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+              MediFind connects you with verified nearby pharmacies. Check medicine availability, compare prices, and see when stock was last updated.
+            </p>
+            
+            {/* Search Controls */}
+            <div className="w-full max-w-2xl bg-white p-2 md:p-3 rounded-2xl shadow-sm border mt-8 flex flex-col md:flex-row gap-3">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <Input 
+                  placeholder="e.g. Amoxicillin 500mg" 
+                  className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-1 text-base rounded-xl"
+                />
+              </div>
+              <div className="relative md:w-1/3">
+                <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <Input 
+                  placeholder="Location" 
+                  defaultValue="Ile-Ife, Osun"
+                  className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-1 text-base rounded-xl"
+                />
+              </div>
+              <Button size="lg" className="h-12 px-8 rounded-xl shrink-0">
+                Find Medicine
+              </Button>
             </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Search Input</label>
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400" />
-                <Input placeholder="Search medicines..." className="pl-9" />
+            
+            <div className="pt-4 flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500">
+              <span>Have a prescription?</span>
+              <Button variant="outline" className="rounded-full shadow-sm">
+                Upload Prescription
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">How MediFind Works</h2>
+            <p className="text-gray-500 mt-4 text-lg">Three simple steps to get your medication faster.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-2">
+                <Search className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">1. Search Medicine</h3>
+              <p className="text-gray-600">Enter the name of your medicine and your location to see nearby availability.</p>
+            </div>
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-2">
+                <Activity className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">2. Compare Pharmacies</h3>
+              <p className="text-gray-600">Compare prices, distance, and see exactly when stock was last confirmed.</p>
+            </div>
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-2">
+                <ShoppingBag className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">3. Reserve & Pick Up</h3>
+              <p className="text-gray-600">Reserve the medicine online and pick it up at the pharmacy without the wait.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stock Trust Section */}
+      <section className="py-20 bg-gray-50 border-y">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">Trust the stock status.</h2>
+              <p className="text-gray-600 text-lg mb-6">
+                Our Hybrid Stock system tells you exactly how reliable the availability data is, so you don&apos;t waste trips.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <Badge variant="LIVE" className="mt-1 shrink-0 w-20 justify-center">LIVE</Badge>
+                  <p className="text-sm text-gray-700"><span className="font-semibold text-gray-900">Live API Sync:</span> Synced directly from the pharmacy&apos;s inventory system in real-time.</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Badge variant="FRESH" className="mt-1 shrink-0 w-20 justify-center">FRESH</Badge>
+                  <p className="text-sm text-gray-700"><span className="font-semibold text-gray-900">Recently Confirmed:</span> Pharmacy staff confirmed availability manually very recently.</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Badge variant="RECENT" className="mt-1 shrink-0 w-20 justify-center">RECENT</Badge>
+                  <p className="text-sm text-gray-700"><span className="font-semibold text-gray-900">Updated Today:</span> The stock was updated at some point today.</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Badge variant="OLD" className="mt-1 shrink-0 w-20 justify-center">OLD</Badge>
+                  <p className="text-sm text-gray-700"><span className="font-semibold text-gray-900">Last Known Stock:</span> Availability hasn&apos;t been confirmed recently; calling ahead recommended.</p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Badges / Stock Status */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4 border-b pb-2">Badges & Stock Status</h2>
-          <div className="flex flex-wrap gap-3">
-            <Badge variant="default">Default</Badge>
-            <Badge variant="LIVE">LIVE</Badge>
-            <Badge variant="FRESH">FRESH</Badge>
-            <Badge variant="RECENT">RECENT</Badge>
-            <Badge variant="OLD">OLD</Badge>
-            <Badge variant="IN_STOCK">IN_STOCK</Badge>
-            <Badge variant="LOW_STOCK">LOW_STOCK</Badge>
-            <Badge variant="OUT_OF_STOCK">OUT_OF_STOCK</Badge>
-          </div>
-        </section>
-
-        {/* Cards */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4 border-b pb-2">Cards</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <div className="flex justify-between items-start mb-2">
-                  <Badge variant="IN_STOCK">In Stock</Badge>
-                  <span className="text-lg font-bold text-emerald-600">₦2,500</span>
-                </div>
-                <CardTitle className="text-lg">Paracetamol 500mg</CardTitle>
-                <CardDescription>Pain relief & fever reducer</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 mb-2">Available at: <span className="font-medium text-gray-900">HealthPlus Pharmacy</span></p>
-                <div className="flex items-center text-xs text-gray-500">
-                  <Badge variant="FRESH" className="mr-2">Fresh</Badge>
-                  Updated 2 hours ago
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full">Reserve Medicine</Button>
-              </CardFooter>
-            </Card>
-          </div>
-        </section>
-
-        {/* App States */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4 border-b pb-2">App States</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium text-gray-500">Loading State</h3>
-              <div className="border rounded-lg bg-white overflow-hidden">
-                <LoadingState />
-              </div>
-            </div>
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium text-gray-500">Skeleton Loading</h3>
-              <div className="border rounded-lg bg-white p-6 space-y-4 h-[200px]">
-                <div className="flex items-center space-x-4">
-                  <Skeleton className="h-12 w-12 rounded-full" />
-                  <div className="space-y-2">
-                    <Skeleton className="h-4 w-[200px]" />
-                    <Skeleton className="h-4 w-[150px]" />
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-center">
+              <div className="space-y-4">
+                <div className="p-4 border rounded-xl flex justify-between items-center bg-gray-50/50">
+                  <div>
+                    <p className="font-semibold text-gray-900">Amartem 80/480mg</p>
+                    <p className="text-xs text-gray-500">HealthPlus Pharmacy</p>
                   </div>
+                  <Badge variant="LIVE">LIVE</Badge>
                 </div>
-                <Skeleton className="h-20 w-full" />
+                <div className="p-4 border rounded-xl flex justify-between items-center bg-gray-50/50">
+                  <div>
+                    <p className="font-semibold text-gray-900">Panadol Extra</p>
+                    <p className="text-xs text-gray-500">MedPlus Pharmacy</p>
+                  </div>
+                  <Badge variant="FRESH">FRESH</Badge>
+                </div>
+                <div className="p-4 border rounded-xl flex justify-between items-center bg-gray-50/50">
+                  <div>
+                    <p className="font-semibold text-gray-900">Vitamin C 1000mg</p>
+                    <p className="text-xs text-gray-500">Alpha Pharmacy</p>
+                  </div>
+                  <Badge variant="RECENT">RECENT</Badge>
+                </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium text-gray-500">Empty State</h3>
-              <EmptyState 
-                action={<Button variant="outline">Clear Filters</Button>} 
-              />
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Why use MediFind?</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div className="p-6 border rounded-2xl bg-gray-50">
+              <ShieldCheck className="w-10 h-10 text-emerald-600 mb-4" />
+              <h3 className="font-semibold text-gray-900 mb-2">Avoid Unnecessary Trips</h3>
+              <p className="text-sm text-gray-600">Stop driving from pharmacy to pharmacy. Know who has it before you go.</p>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-sm font-medium text-gray-500">Error State</h3>
-              <ErrorState onRetry={() => {}} />
+            <div className="p-6 border rounded-2xl bg-gray-50">
+              <Activity className="w-10 h-10 text-emerald-600 mb-4" />
+              <h3 className="font-semibold text-gray-900 mb-2">Compare Nearby</h3>
+              <p className="text-sm text-gray-600">Compare medicine availability and prices across multiple local pharmacies.</p>
+            </div>
+            <div className="p-6 border rounded-2xl bg-gray-50">
+              <CheckCircle className="w-10 h-10 text-emerald-600 mb-4" />
+              <h3 className="font-semibold text-gray-900 mb-2">Discover Alternatives</h3>
+              <p className="text-sm text-gray-600">Find related products or generics when exact brands are unavailable.</p>
+            </div>
+            <div className="p-6 border rounded-2xl bg-gray-50">
+              <Clock className="w-10 h-10 text-emerald-600 mb-4" />
+              <h3 className="font-semibold text-gray-900 mb-2">Reserve Ahead</h3>
+              <p className="text-sm text-gray-600">Reserve your medication online before travelling to guarantee it&apos;s waiting.</p>
             </div>
           </div>
-        </section>
-      </div>
-    </PageWrapper>
+        </div>
+      </section>
+
+      {/* Pharmacy CTA */}
+      <section className="bg-emerald-900 text-white py-16">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
+            <div className="space-y-4 max-w-xl text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-2 text-emerald-300 font-medium mb-2">
+                <Store className="w-5 h-5" />
+                <span>For Pharmacies</span>
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight text-white">Own a pharmacy? Join MediFind.</h2>
+              <p className="text-emerald-100 text-lg">
+                Reach nearby customers, manage your medicine availability online, receive reservation requests, and understand local medicine demand.
+              </p>
+            </div>
+            <div className="shrink-0">
+              <Link href="/pharmacy/register">
+                <Button size="lg" className="bg-white text-emerald-900 hover:bg-gray-100 border-0 text-base h-12 px-8 rounded-full shadow-lg">
+                  Register Your Pharmacy
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
