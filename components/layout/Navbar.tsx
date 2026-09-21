@@ -17,10 +17,7 @@ export function Navbar() {
     pathname?.startsWith("/reservations") ||
     pathname?.startsWith("/saved");
 
-  // Close on route change
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+
 
   // Close on outside click
   useEffect(() => {

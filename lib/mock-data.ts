@@ -184,7 +184,7 @@ export const MOCK_SEARCH_RESULTS: SearchResult[] = [
  * Simulates fetching search results.
  * Replace with `api.get<SearchResult[]>(...)` in Phase 4.
  */
-export function getMockSearchResults(_query: string, _location: string): SearchResult[] {
+export function getMockSearchResults(): SearchResult[] {
   // In a real implementation, filter by query and location here.
   return MOCK_SEARCH_RESULTS;
 }

@@ -1,11 +1,26 @@
+"use client";
+
 import Link from "next/link";
-// Removed unused PageWrapper
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, ShieldCheck, Clock, CheckCircle, Activity, ShoppingBag, ArrowRight, Store } from "lucide-react";
 
 export default function LandingPage() {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const [location, setLocation] = useState("Ile-Ife, Osun");
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (location) params.set("location", location);
+    router.push(`/search?${params.toString()}`);
+  }
+
   return (
     <div className="flex-1">
       {/* Hero Section */}
@@ -24,11 +39,16 @@ export default function LandingPage() {
             </p>
             
             {/* Search Controls */}
-            <div className="w-full max-w-2xl bg-white p-2 md:p-3 rounded-2xl shadow-sm border mt-8 flex flex-col md:flex-row gap-3">
+            <form 
+              onSubmit={handleSearch}
+              className="w-full max-w-2xl bg-white p-2 md:p-3 rounded-2xl shadow-sm border mt-8 flex flex-col md:flex-row gap-3"
+            >
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <Input 
-                  placeholder="e.g. Amoxicillin 500mg" 
+                  placeholder="e.g. Amoxicillin 500mg"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                   className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-1 text-base rounded-xl"
                 />
               </div>
@@ -36,14 +56,15 @@ export default function LandingPage() {
                 <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <Input 
                   placeholder="Location" 
-                  defaultValue="Ile-Ife, Osun"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                   className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-1 text-base rounded-xl"
                 />
               </div>
-              <Button size="lg" className="h-12 px-8 rounded-xl shrink-0">
+              <Button type="submit" size="lg" className="h-12 px-8 rounded-xl shrink-0">
                 Find Medicine
               </Button>
-            </div>
+            </form>
             
             <div className="pt-4 flex flex-col sm:flex-row items-center gap-4 text-sm text-gray-500">
               <span>Have a prescription?</span>

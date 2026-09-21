@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +10,18 @@ import { Search, MapPin, Clock, ArrowRight, FileText } from "lucide-react";
 import Link from "next/link";
 
 export default function UserHomePage() {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const [location, setLocation] = useState("Ile-Ife, Osun");
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (location) params.set("location", location);
+    router.push(`/search?${params.toString()}`);
+  }
+
   const popularSearches = [
     "Paracetamol 500mg",
     "Amoxicillin 500mg",
@@ -27,11 +43,16 @@ export default function UserHomePage() {
           What medicine are you looking for?
         </h1>
         
-        <div className="w-full max-w-3xl bg-white p-2 md:p-3 rounded-2xl shadow-sm border flex flex-col md:flex-row gap-3">
+        <form 
+          onSubmit={handleSearch}
+          className="w-full max-w-3xl bg-white p-2 md:p-3 rounded-2xl shadow-sm border flex flex-col md:flex-row gap-3"
+        >
           <div className="relative flex-1">
             <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             <Input 
               placeholder="Search e.g. Amoxicillin 500mg" 
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-1 text-base rounded-xl"
             />
           </div>
@@ -39,14 +60,15 @@ export default function UserHomePage() {
             <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             <Input 
               placeholder="Location" 
-              defaultValue="Ile-Ife, Osun"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               className="pl-10 h-12 border-0 bg-gray-50 focus-visible:ring-1 text-base rounded-xl"
             />
           </div>
-          <Button size="lg" className="h-12 px-8 rounded-xl shrink-0 text-base">
+          <Button type="submit" size="lg" className="h-12 px-8 rounded-xl shrink-0 text-base">
             Search
           </Button>
-        </div>
+        </form>
       </section>
 
       <div className="grid md:grid-cols-3 gap-8">
@@ -58,6 +80,7 @@ export default function UserHomePage() {
               {popularSearches.map((search) => (
                 <button 
                   key={search}
+                  onClick={() => router.push(`/search?q=${encodeURIComponent(search)}&location=${encodeURIComponent(location)}`)}
                   className="px-4 py-2 bg-white border rounded-full text-sm font-medium text-gray-700 hover:border-emerald-500 hover:text-emerald-700 transition-colors shadow-sm"
                 >
                   {search}
@@ -77,7 +100,11 @@ export default function UserHomePage() {
             
             <div className="space-y-3">
               {recentSearches.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-4 bg-white border rounded-xl hover:shadow-sm transition-shadow cursor-pointer">
+                <div 
+                  key={idx} 
+                  onClick={() => router.push(`/search?q=${encodeURIComponent(item.query)}&location=${encodeURIComponent(item.location)}`)}
+                  className="flex items-center justify-between p-4 bg-white border rounded-xl hover:shadow-sm transition-shadow cursor-pointer"
+                >
                   <div className="flex items-center gap-4">
                     <div className="bg-gray-100 p-2 rounded-lg text-gray-500">
                       <Clock className="w-5 h-5" />

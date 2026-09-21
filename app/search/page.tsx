@@ -341,7 +341,7 @@ function SearchContent() {
   });
 
   const allResults = useMemo(
-    () => getMockSearchResults(initialQ, initialLocation),
+    () => getMockSearchResults(),
     [initialQ, initialLocation]
   );
 
