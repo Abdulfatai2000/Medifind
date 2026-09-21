@@ -342,7 +342,9 @@ function SearchContent() {
 
   const allResults = useMemo(
     () => getMockSearchResults(),
-    [initialQ, initialLocation]
+    // getMockSearchResults has no arguments; results don't depend on URL params at this layer
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   const filteredResults = useMemo(

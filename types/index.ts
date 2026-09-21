@@ -122,3 +122,77 @@ export interface Prescription {
   notes?: string;
   createdAt: string;
 }
+
+// ── Prescription Flow Types ───────────────────────────────────────────────
+
+export type PrescriptionStatus =
+  | 'IDLE'
+  | 'SELECTED'
+  | 'UPLOADING'
+  | 'PROCESSING'
+  | 'PROCESSED'
+  | 'ERROR';
+
+export interface PrescriptionMedicine {
+  id: string;
+  name: string;
+  strength: string;
+  dosageForm: string;
+  confidence: 'HIGH' | 'MEDIUM' | 'LOW';
+}
+
+export interface PrescriptionPharmacyMedicineMatch {
+  medicine: PrescriptionMedicine;
+  price: number;
+  freshness: StockFreshness;
+  lastUpdated: string;
+  available: boolean;
+}
+
+export interface PrescriptionMatch {
+  pharmacyId: string;
+  pharmacyName: string;
+  verified: boolean;
+  distanceKm: number;
+  isOpen: boolean;
+  address: string;
+  contactPhone: string;
+  availableCount: number;
+  totalCount: number;
+  estimatedTotal: number;
+  medicines: PrescriptionPharmacyMedicineMatch[];
+}
+
+export interface LowestCostCombination {
+  pharmacies: {
+    pharmacyId: string;
+    pharmacyName: string;
+    medicines: PrescriptionPharmacyMedicineMatch[];
+    subtotal: number;
+  }[];
+  grandTotal: number;
+}
+
+// ── Saved Items Types ─────────────────────────────────────────────────────
+
+export interface SavedMedicine {
+  id: string;
+  medicineId: string;
+  medicineName: string;
+  brand: string;
+  strength: string;
+  dosageForm: string;
+  savedAt: string;
+}
+
+export interface SavedPharmacy {
+  id: string;
+  pharmacyId: string;
+  pharmacyName: string;
+  verified: boolean;
+  address: string;
+  distanceKm?: number;
+  isOpen?: boolean;
+  savedAt: string;
+}
+
